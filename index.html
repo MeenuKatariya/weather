@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     #container{
+         display: grid;
+         gap: 2vw;
+         grid-template-columns: repeat(3,1fr);
+         border: 1px solid black;
+
+     }
+
+
+
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="Enter City Name" id="input">
+    <button id="button">Button</button>
+    <div id="container"></div>
+    <script >
+        document.querySelector("#button").addEventListener("click",function(){
+       
+        
+        var data=document.querySelector("#input").value
+       
+        // async function getData(){
+        //  var fetchData=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${data}&appid=3b4e3fabab9e39d113c1e6ba63cc23b0`)
+        //   var products=await fetchData.json();
+        //   return products;
+        // //   console.log(products)
+
+         
+
+        // }
+        //  getData();
+        
+        // });
+
+    var url=`https://api.openweathermap.org/data/2.5/weather?q=${data}&appid=3b4e3fabab9e39d113c1e6ba63cc23b0`
+
+        fetch(url)
+        .then((response)=>{
+            if(!response.ok){
+                alert("no weather")
+            }return resonse.join()
+        })
+        .then((data));
+        displayData(data)
+        })
+       
+        function displayData(data){
+         
+         var div=document.createElement("div");
+         var temp=document.createElement("p");
+         temp.innerText=data.main.temp;
+
+         var pressure=document.createElement("p");
+         pressure.innerText=data.main.pressure;
+
+         var humidity=document.createElement("p");
+         humidity.innerText=data.main.humidity;
+
+         var windSpeed=document.createElement("p");
+         windSpeed.innerText=data.wind.speed;
+
+         var sunrise=document.createElement("p");
+         sunrise.innerText=data.sys.sunrise;
+
+         var sunset=document.createElement("p");
+         sunset.innerText=data.sys.sunset;
+
+         var weatherDescription=document.createElement("p");
+         weatherDescription.innerText=data.weather.description;
+         div.append(temp,pressure,humidity,windSpeed,sunrise,sunset,weatherDescription)
+         document.querySelector("#container").append(div);
+
+    
+
+     }
+     displayData(data)
+    
+
+    </script>
+
+
+</body>
+</html>
